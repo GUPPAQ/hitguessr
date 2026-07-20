@@ -1,6 +1,6 @@
 // --- KONFIGURATION ---
-const CLIENT_ID = 'KLISTRA_IN_DITT_CLIENT_ID_HÄR'; 
-const REDIRECT_URI = 'http://localhost:5500/'; 
+const CLIENT_ID = '181216a37f1e48378e89b32fc5b208a1'; 
+const REDIRECT_URI = 'https://guppaq.github.io/hitguessr/'; 
 const SCOPES = 'streaming user-read-email user-read-private';
 
 let accessToken = null;
