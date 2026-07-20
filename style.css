@@ -1,0 +1,132 @@
+:root {
+    --bg-color: #121212;
+    --text-color: #ffffff;
+    --spotify-green: #1DB954;
+    --card-bg: #282828;
+    --card-hover: #3E3E3E;
+}
+
+body {
+    margin: 0;
+    font-family: 'Helvetica Neue', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    text-align: center;
+}
+
+.screen {
+    display: none;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.screen.active {
+    display: block;
+}
+
+#login-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+button {
+    background-color: var(--spotify-green);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+button:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.controls {
+    display: flex;
+    gap: 20px;
+}
+
+/* Mysteriekortet */
+.card {
+    background-color: var(--card-bg);
+    width: 200px;
+    height: 280px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    cursor: grab;
+    transition: transform 0.3s;
+}
+
+.card:active {
+    cursor: grabbing;
+}
+
+.card .question-mark {
+    font-size: 80px;
+    font-weight: bold;
+}
+
+/* Spelarflikar */
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    background-color: var(--card-bg);
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+.tab-btn.active {
+    background-color: var(--spotify-green);
+}
+
+/* Tidslinjen */
+.timeline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    min-height: 300px;
+    padding: 20px;
+    background-color: rgba(255,255,255,0.05);
+    border-radius: 15px;
+}
+
+.dropzone {
+    width: 150px;
+    height: 250px;
+    border: 2px dashed #666;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #666;
+}
