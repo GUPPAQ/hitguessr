@@ -74,9 +74,13 @@ async function checkUrlForCode() {
             if (response.access_token) {
                 accessToken = response.access_token;
                 
-                // Vi är inloggade! Byt skärm
-                document.getElementById('login-screen').classList.remove('active');
-                document.getElementById('game-screen').classList.add('active');
+// Vi är inloggade! Byt skärm
+document.getElementById('login-screen').classList.remove('active');
+document.getElementById('game-screen').classList.add('active');
+
+// Tvinga webbläsaren att gömma login och visa spelet (ifall CSS saknas)
+document.getElementById('login-screen').style.display = 'none';
+document.getElementById('game-screen').style.display = 'block';
                 
                 // Rensa URL:en så den ser snygg ut
                 window.history.pushState("", document.title, window.location.pathname);
