@@ -5,32 +5,85 @@ const SCOPES = 'streaming user-read-email user-read-private';
 
 let accessToken = null;
 
+// --- SÄKERHETSFUNKTIONER FÖR SPOTIFY (PKCE) ---
+function generateRandomString(length) {
+    let text = '';
+    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (let i = 0; i < length; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text;
+}
+
+async function generateCodeChallenge(codeVerifier) {
+    const data = new TextEncoder().encode(codeVerifier);
+    const digest = await window.crypto.subtle.digest('SHA-256', data);
+    return btoa(String.fromCharCode.apply(null, [...new Uint8Array(digest)]))
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_')
+        .replace(/=+$/, '');
+}
+
 // --- SPOTIFY INLOGGNING ---
 const loginBtn = document.getElementById('login-btn');
 
-loginBtn.addEventListener('click', () => {
-    const authUrl = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&response_type=token&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=${encodeURIComponent(SCOPES)}`;
-    window.location.href = authUrl;
+loginBtn.addEventListener('click', async () => {
+    // Skapa säkerhetsnycklar för inloggningen
+    const codeVerifier = generateRandomString(128);
+    window.localStorage.setItem('code_verifier', codeVerifier);
+    const codeChallenge = await generateCodeChallenge(codeVerifier);
+
+    const authUrl = new URL("https://accounts.spotify.com/authorize");
+    authUrl.search = new URLSearchParams({
+        client_id: CLIENT_ID,
+        response_type: 'code',
+        redirect_uri: REDIRECT_URI,
+        scope: SCOPES,
+        code_challenge_method: 'S256',
+        code_challenge: codeChallenge
+    }).toString();
+
+    window.location.href = authUrl.toString();
 });
 
-// Kolla om vi precis kom tillbaka från Spotify med en token
-function checkUrlForToken() {
-    const hash = window.location.hash;
-    if (hash) {
-        const urlParams = new URLSearchParams(hash.substring(1));
-        accessToken = urlParams.get('access_token');
+// Kolla om vi precis kom tillbaka från Spotify med en kod
+async function checkUrlForCode() {
+    const urlParams = new URLSearchParams(window.location.search);
+    let code = urlParams.get('code');
+
+    if (code) {
+        let codeVerifier = localStorage.getItem('code_verifier');
         
-        if (accessToken) {
-            // Vi är inloggade! Byt skärm
-            document.getElementById('login-screen').classList.remove('active');
-            document.getElementById('game-screen').classList.active = true;
-            document.getElementById('game-screen').style.display = 'block'; // Tvinga visning
+        // Byt ut koden mot en riktig Access Token
+        const payload = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({
+                client_id: CLIENT_ID,
+                grant_type: 'authorization_code',
+                code: code,
+                redirect_uri: REDIRECT_URI,
+                code_verifier: codeVerifier
+            })
+        };
+
+        try {
+            const body = await fetch("https://accounts.spotify.com/api/token", payload);
+            const response = await body.json();
             
-            // Rensa URL:en så den ser snygg ut
-            window.history.pushState("", document.title, window.location.pathname);
-            
-            // Redo att hämta låtar! (Nästa steg)
-            console.log("Inloggad och redo!");
+            if (response.access_token) {
+                accessToken = response.access_token;
+                
+                // Vi är inloggade! Byt skärm
+                document.getElementById('login-screen').classList.remove('active');
+                document.getElementById('game-screen').classList.add('active');
+                
+                // Rensa URL:en så den ser snygg ut
+                window.history.pushState("", document.title, window.location.pathname);
+                console.log("Inloggad och redo! Token hämtad.");
+            }
+        } catch (error) {
+            console.error("Kunde inte hämta token", error);
         }
     }
 }
@@ -39,18 +92,13 @@ function checkUrlForToken() {
 const tabs = document.querySelectorAll('.tab-btn');
 let currentPlayerIndex = 0;
 
-// Logik för att byta flik mellan familjemedlemmarna
 tabs.forEach(tab => {
     tab.addEventListener('click', (e) => {
-        // Ta bort aktiv klass från alla
         tabs.forEach(t => t.classList.remove('active'));
-        // Sätt aktiv klass på klickad
         e.target.classList.add('active');
         
         currentPlayerIndex = e.target.getAttribute('data-player');
         console.log("Bytte till spelare: " + currentPlayerIndex);
-        
-        // Här ska koden in för att byta ut korten på tidslinjen
     });
 });
 
@@ -58,12 +106,10 @@ const drawCardBtn = document.getElementById('draw-card-btn');
 const mysteryCard = document.getElementById('mystery-card');
 const lockInBtn = document.getElementById('lock-in-btn');
 
-// Dra ett kort
 drawCardBtn.addEventListener('click', () => {
     mysteryCard.classList.remove('hidden');
     lockInBtn.disabled = false;
-    // Här lägger vi till anropet till Spotify API för att hämta slumpmässig låt
 });
 
 // Körs när sidan laddas
-window.onload = checkUrlForToken;
+window.onload = checkUrlForCode;
