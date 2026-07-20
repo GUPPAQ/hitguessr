@@ -113,3 +113,7 @@ drawCardBtn.addEventListener('click', () => {
 
 // Körs när sidan laddas
 window.onload = checkUrlForCode;
+
+window.onSpotifyWebPlaybackSDKReady = () => {
+    console.log("Spotify SDK är laddat och redo att användas!");
+};
