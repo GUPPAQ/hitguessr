@@ -1,0 +1,22 @@
+#app{min-height:100dvh;isolation:isolate}
+.screen{display:none;min-height:100dvh}
+.screen.is-active{display:flex;flex-direction:column}
+
+#screen-start.is-active{align-items:center;justify-content:center;padding:24px}
+.start-content{width:100%;max-width:480px;background:var(--paper);border:4px solid var(--ink);box-shadow:var(--shadow-lg);padding:48px 32px;display:flex;flex-direction:column;align-items:center;gap:24px;transform:rotate(-1deg)}
+.start-content>*{transform:rotate(1deg)}
+.wordmark{font-family:var(--font-display);font-size:clamp(3rem,9vw,4.6rem);font-weight:900;line-height:0.9;letter-spacing:-0.04em}
+.tagline{font-family:var(--font-mono);font-size:0.9rem;color:var(--ink-soft);text-align:center;max-width:32ch;line-height:1.4}
+
+#screen-game.is-active{height:100dvh;overflow:hidden}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:16px 28px;background:var(--paper);border-bottom:4px solid var(--ink);position:sticky;top:0;z-index:20}
+.topbar__stats{display:flex;gap:32px}
+.stage{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:32px;padding:32px;position:relative}
+.player-console{display:flex;flex-direction:row;align-items:center;gap:48px;z-index:2}
+.timeline-dock{flex-shrink:0;width:100%;background:var(--mustard);border-top:4px solid var(--ink);padding:18px 0;box-shadow:inset 0 12px 20px rgba(0,0,0,0.12);z-index:10}
+.timeline-dock__label{font-family:var(--font-mono);font-size:0.72rem;font-weight:700;text-transform:uppercase;text-align:center;margin-bottom:16px;display:flex;align-items:center;justify-content:center;gap:12px}
+.timeline-dock__label::before,.timeline-dock__label::after{content:"";height:3px;width:22px;background:var(--ink)}
+
+#screen-end.is-active{align-items:center;justify-content:center;padding:24px}
+.end-content{width:100%;max-width:560px;background:var(--paper);border:4px solid var(--ink);box-shadow:var(--shadow-lg);padding:48px;text-align:center;display:flex;flex-direction:column;gap:16px;align-items:center}
+.end-title{font-family:var(--font-display);font-size:clamp(2.8rem,6vw,4rem);line-height:0.9}
