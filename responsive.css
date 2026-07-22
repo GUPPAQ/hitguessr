@@ -1,8 +1,0 @@
-@media(max-width:720px){
-  .topbar{padding:12px 16px}.player-console{flex-direction:column;gap:22px}
-  .card--mystery{width:min(320px,84vw)}.card--mystery:hover .card__disc{transform:none}
-  .card--mystery.is-playing .card__disc{transform:translateX(44%)}
-  .timeline{padding:10px 18px;gap:10px}.timeline-card{width:98px}.timeline-card__art{width:54px;height:54px}
-  .feedback{bottom:120px;width:calc(100% - 32px);text-align:center}
-  .start-content{transform:none;padding:32px 20px}.start-content>*{transform:none}
-}
