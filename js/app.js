@@ -42,7 +42,31 @@ const landingScreen = document.querySelector(
 
 function changeScreen(screenName) {
 
+
+    document
+        .querySelectorAll(".screen")
+        .forEach(screen => {
+
+            screen.classList.add("hidden");
+
+        });
+
+
+    const nextScreen =
+        document.getElementById(
+            `${screenName}-screen`
+        );
+
+
+    if (nextScreen) {
+
+        nextScreen.classList.remove("hidden");
+
+    }
+
+
     appState.currentScreen = screenName;
+
 
     console.log(
         "Changed screen:",
