@@ -1,1 +1,120 @@
+/* ==========================================
+   TABLET
+========================================== */
 
+@media (max-width: 900px) {
+
+
+    .screen {
+
+        padding: 40px 20px;
+
+    }
+
+
+    .hero h1 {
+
+        font-size: 4rem;
+
+    }
+
+
+    .hero-description {
+
+        font-size: 1.1rem;
+
+    }
+
+
+}
+
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 600px) {
+
+
+    .screen {
+
+        padding:
+
+            32px 16px;
+
+    }
+
+
+
+    .hero {
+
+        gap: 18px;
+
+    }
+
+
+
+    .hero h1 {
+
+        font-size:
+
+            3.2rem;
+
+    }
+
+
+
+    .hero-description {
+
+        font-size:
+
+            1rem;
+
+        line-height:
+
+            1.6;
+
+    }
+
+
+
+    .primary-button {
+
+        width:
+
+            100%;
+
+        max-width:
+
+            320px;
+
+    }
+
+
+
+    .playlist-card {
+
+        width:
+
+            100%;
+
+        max-width:
+
+            320px;
+
+    }
+
+
+
+    .song-card {
+
+        width:
+
+            200px;
+
+    }
+
+
+
+}
