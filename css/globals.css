@@ -65,3 +65,9 @@ button {
     font-family: inherit;
 
 }
+
+.hidden {
+
+    display: none !important;
+
+}
