@@ -10,7 +10,6 @@
 // APP STATE
 // ==========================================
 
-
 const appState = {
 
     currentScreen: "landing",
@@ -27,16 +26,9 @@ const appState = {
 // DOM ELEMENTS
 // ==========================================
 
-
-if (startButton) {
-
-    startButton.addEventListener(
-        "click",
-        startGame
-    );
-
-}
-
+const startButton = document.querySelector(
+    ".primary-button"
+);
 
 const landingScreen = document.querySelector(
     "#landing-screen"
@@ -48,18 +40,14 @@ const landingScreen = document.querySelector(
 // SCREEN MANAGEMENT
 // ==========================================
 
-
 function changeScreen(screenName) {
 
-
     appState.currentScreen = screenName;
-
 
     console.log(
         "Changed screen:",
         screenName
     );
-
 
 }
 
@@ -69,20 +57,15 @@ function changeScreen(screenName) {
 // START GAME
 // ==========================================
 
-
 function startGame() {
-
 
     appState.gameStarted = true;
 
-
     changeScreen("setup");
-
 
     console.log(
         "Game started!"
     );
-
 
 }
 
@@ -92,11 +75,14 @@ function startGame() {
 // EVENTS
 // ==========================================
 
+if (startButton) {
 
-startButton.addEventListener(
-    "click",
-    startGame
-);
+    startButton.addEventListener(
+        "click",
+        startGame
+    );
+
+}
 
 
 
@@ -104,9 +90,7 @@ startButton.addEventListener(
 // INIT
 // ==========================================
 
-
 function init() {
-
 
     console.log(
         "🎵 HitGuessr loaded"
@@ -117,9 +101,7 @@ function init() {
         appState
     );
 
-
 }
-
 
 
 init();
