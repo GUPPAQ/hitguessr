@@ -43,8 +43,6 @@
 
     animation-delay: 0.1s;
 
-    opacity: 0;
-
 }
 
 
@@ -54,8 +52,6 @@
 
     animation-delay: 0.2s;
 
-    opacity: 0;
-
 }
 
 
@@ -64,8 +60,6 @@
     animation: fadeIn 0.7s ease forwards;
 
     animation-delay: 0.3s;
-
-    opacity: 0;
 
 }
 
@@ -136,10 +130,10 @@
 
 .primary-button:hover {
 
-    animation: none;
-
     box-shadow:
         0 0 35px rgba(30,215,96,0.25);
+
+    transform: translateY(-3px);
 
 }
 
