@@ -118,3 +118,33 @@
 
 
 }
+
+@media (max-width: 700px) {
+
+
+    .mode-grid {
+
+        grid-template-columns:
+
+            1fr;
+
+        width:
+
+            100%;
+
+    }
+
+
+    .mode-card {
+
+        width:
+
+            100%;
+
+        box-sizing:
+
+            border-box;
+
+    }
+
+}
