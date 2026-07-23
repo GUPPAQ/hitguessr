@@ -28,9 +28,14 @@ const appState = {
 // ==========================================
 
 
-const startButton = document.querySelector(
-    ".primary-button"
-);
+if (startButton) {
+
+    startButton.addEventListener(
+        "click",
+        startGame
+    );
+
+}
 
 
 const landingScreen = document.querySelector(
