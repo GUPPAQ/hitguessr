@@ -229,9 +229,3 @@
     background: var(--accent);
 
 }
-
-
-.primary-button {
-    opacity: 1 !important;
-    display: block !important;
-}
