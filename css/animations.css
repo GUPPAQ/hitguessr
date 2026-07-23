@@ -136,7 +136,10 @@
 
 .primary-button:hover {
 
-    animation: pulseGlow 1.5s infinite;
+    animation: none;
+
+    box-shadow:
+        0 0 35px rgba(30,215,96,0.25);
 
 }
 
