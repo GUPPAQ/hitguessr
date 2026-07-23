@@ -1,1 +1,409 @@
+/* ==========================================
+   FADE IN
+========================================== */
 
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+.fade-in {
+
+    animation: fadeIn 0.5s ease forwards;
+
+}
+
+
+
+/* ==========================================
+   HERO ENTRANCE
+========================================== */
+
+
+.hero .eyebrow {
+
+    animation: fadeIn 0.6s ease forwards;
+
+}
+
+
+.hero h1 {
+
+    animation: fadeIn 0.7s ease forwards;
+
+    animation-delay: 0.1s;
+
+    opacity: 0;
+
+}
+
+
+.hero-description {
+
+    animation: fadeIn 0.7s ease forwards;
+
+    animation-delay: 0.2s;
+
+    opacity: 0;
+
+}
+
+
+.hero .primary-button {
+
+    animation: fadeIn 0.7s ease forwards;
+
+    animation-delay: 0.3s;
+
+    opacity: 0;
+
+}
+
+
+
+/* ==========================================
+   FLOATING EFFECT
+========================================== */
+
+@keyframes floating {
+
+    0% {
+        transform: translateY(0px);
+    }
+
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+
+    100% {
+        transform: translateY(0px);
+    }
+
+}
+
+
+.floating {
+
+    animation: floating 4s ease-in-out infinite;
+
+}
+
+
+
+/* ==========================================
+   BUTTON GLOW
+========================================== */
+
+@keyframes pulseGlow {
+
+    0% {
+
+        box-shadow:
+        0 0 0 rgba(30,215,96,0);
+
+    }
+
+
+    50% {
+
+        box-shadow:
+        0 0 35px rgba(30,215,96,0.25);
+
+    }
+
+
+    100% {
+
+        box-shadow:
+        0 0 0 rgba(30,215,96,0);
+
+    }
+
+}
+
+
+.primary-button:hover {
+
+    animation: pulseGlow 1.5s infinite;
+
+}
+
+
+
+/* ==========================================
+   CARD HOVER
+========================================== */
+
+
+.card,
+.playlist-card,
+.song-card {
+
+    transition:
+
+        transform 0.25s ease,
+
+        box-shadow 0.25s ease,
+
+        border-color 0.25s ease;
+
+}
+
+
+
+.card:hover,
+.song-card:hover {
+
+    transform: translateY(-6px);
+
+    box-shadow:
+
+        0 20px 40px rgba(0,0,0,0.35);
+
+}
+
+
+
+/* ==========================================
+   SONG CARD DRAG
+========================================== */
+
+
+.song-card.dragging {
+
+    transform:
+
+        rotate(4deg)
+
+        scale(1.05);
+
+    opacity: 0.85;
+
+    box-shadow:
+
+        0 30px 60px rgba(0,0,0,0.5);
+
+}
+
+
+
+/* ==========================================
+   CARD FLIP REVEAL
+========================================== */
+
+
+.card-container {
+
+    perspective: 1000px;
+
+}
+
+
+.card-flip {
+
+    transition:
+
+        transform 0.6s ease;
+
+    transform-style: preserve-3d;
+
+}
+
+
+.card-flip.revealed {
+
+    transform:
+
+        rotateY(180deg);
+
+}
+
+
+
+/* ==========================================
+   SUCCESS
+========================================== */
+
+
+@keyframes successPop {
+
+
+    0% {
+
+        transform: scale(0.9);
+
+        opacity: 0;
+
+    }
+
+
+    70% {
+
+        transform: scale(1.05);
+
+    }
+
+
+    100% {
+
+        transform: scale(1);
+
+        opacity: 1;
+
+    }
+
+}
+
+
+
+.correct-animation {
+
+    animation:
+
+        successPop 0.45s ease forwards;
+
+}
+
+
+
+/* ==========================================
+   ERROR
+========================================== */
+
+
+@keyframes shake {
+
+
+    0%,
+    100% {
+
+        transform: translateX(0);
+
+    }
+
+
+    25% {
+
+        transform: translateX(-8px);
+
+    }
+
+
+    75% {
+
+        transform: translateX(8px);
+
+    }
+
+}
+
+
+
+.wrong-animation {
+
+    animation:
+
+        shake 0.35s ease;
+
+}
+
+
+
+/* ==========================================
+   TIMELINE DROP
+========================================== */
+
+
+@keyframes timelineDrop {
+
+
+    from {
+
+        opacity: 0;
+
+        transform:
+
+            translateY(-20px)
+
+            scale(0.95);
+
+    }
+
+
+    to {
+
+        opacity: 1;
+
+        transform:
+
+            translateY(0)
+
+            scale(1);
+
+    }
+
+}
+
+
+
+.timeline-card-enter {
+
+    animation:
+
+        timelineDrop 0.35s ease forwards;
+
+}
+
+
+
+/* ==========================================
+   LOADING
+========================================== */
+
+
+@keyframes loadingPulse {
+
+
+    0% {
+
+        opacity: 0.5;
+
+    }
+
+
+    50% {
+
+        opacity: 1;
+
+    }
+
+
+    100% {
+
+        opacity: 0.5;
+
+    }
+
+}
+
+
+
+.loading {
+
+    animation:
+
+        loadingPulse 1.5s infinite;
+
+}
