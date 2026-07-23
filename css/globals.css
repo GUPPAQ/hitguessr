@@ -1,13 +1,67 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700..900&family=JetBrains+Mono:wght@700&family=Manrope:wght@500;800&display=swap');
-:root{
-  --bg:#F6F0E4; --paper:#fff; --ink:#141210; --ink-soft:#5a5550;
-  --terracotta:#FF4D1C; --mustard:#FFC20E; --mustard-soft:#FFF5CC; --green:#2D7D6B;
-  --font-display:"Fraunces",serif; --font-body:"Manrope",sans-serif; --font-mono:"JetBrains Mono",monospace;
-  --space-2:8px; --space-3:12px; --space-4:16px; --space-5:24px; --space-6:32px; --space-7:48px;
-  --shadow-sm:4px 4px 0 var(--ink); --shadow:8px 8px 0 var(--ink); --shadow-lg:14px 14px 0 var(--ink);
-  --ease-spring:cubic-bezier(0.34,1.56,0.64,1); --ease-out:cubic-bezier(0.16,1,0.3,1);
+:root {
+
+    /* Colors */
+
+    --bg: #0B0B0C;
+    --surface: #17181C;
+    --surface-hover: #23252B;
+
+    --border: #2E3138;
+
+    --accent: #1ED760;
+
+    --text: #FFFFFF;
+    --text-muted: #9CA3AF;
+
+    --success: #22C55E;
+    --danger: #EF4444;
+
+
+    /* Spacing */
+
+    --radius-sm: 12px;
+    --radius-md: 20px;
+    --radius-pill: 999px;
+
+
+    /* Animation */
+
+    --transition: 0.25s ease;
+
+
+    /* Font */
+
+    --font-main: "Inter", sans-serif;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-body{min-height:100dvh;background-color:var(--bg);background-image:radial-gradient(var(--ink) 0.6px, transparent 0.6px);background-size:24px 24px;color:var(--ink);font-family:var(--font-body);overflow-x:hidden;-webkit-font-smoothing:antialiased}
-body::before{content:"";position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
-.eyebrow{font-family:var(--font-mono);font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--terracotta);font-weight:700}
+
+
+/* Reset */
+
+* {
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+    min-height: 100%;
+
+    background: var(--bg);
+
+    color: var(--text);
+
+    font-family: var(--font-main);
+
+}
+
+
+button {
+
+    font-family: inherit;
+
+}
