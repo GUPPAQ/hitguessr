@@ -189,6 +189,16 @@ async function apiCall(endpoint, method = 'GET', body = null) {
   return await res.json();
 }
 
+export async function getSpotifyUserProfile() {
+  try {
+    const data = await apiCall('/me');
+    return data?.display_name || data?.id || null;
+  } catch (e) {
+    console.warn("[HitGuessr] Could not fetch user profile:", e.message || e);
+    return null;
+  }
+}
+
 // ── Fetch playlist or album tracks (with pagination & fallback properties) ──
 export async function fetchPlaylistTracks(targetInput) {
   let target = targetInput;
