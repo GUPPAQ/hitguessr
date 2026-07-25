@@ -162,7 +162,6 @@
   min-height: unset;
   padding: 0;
   overflow: hidden;
-  background: radial-gradient(circle at 50% 50%, #151025 0%, #060810 100%);
   grid-template-rows: 60px 1fr 240px; /* HUD, Play Area, Timeline */
   grid-template-columns: 1fr;
   grid-template-areas:
