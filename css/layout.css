@@ -34,13 +34,13 @@
   z-index: 1;
 }
 
-/* Landing & Lobby: viewport-locked by default, scrollable only if content overflows */
+/* Landing & Lobby: viewport-locked, no page scroll */
 #landing-screen,
 #lobby-screen {
   height: 100vh;
   height: 100dvh;
   min-height: unset;
-  overflow-y: auto;
+  overflow: hidden;
   padding: 24px;
 }
 
