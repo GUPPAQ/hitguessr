@@ -158,8 +158,8 @@
 }
 
 .lobby-section {
-  margin-top: 24px;
-  padding: 24px 28px;
+  margin-top: 16px;
+  padding: 18px 24px;
   background: rgba(255, 255, 255, 0.025);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);

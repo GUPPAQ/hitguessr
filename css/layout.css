@@ -34,17 +34,16 @@
   z-index: 1;
 }
 
-/* Landing: viewport-locked, no scroll */
-#landing-screen {
+/* Landing & Lobby: viewport-locked by default, scrollable only if content overflows */
+#landing-screen,
+#lobby-screen {
   height: 100vh;
   height: 100dvh;
   min-height: unset;
-  overflow: hidden;
+  overflow-y: auto;
+  padding: 24px;
 }
 
-/* Other screens: scrollable, perfectly centered */
-#lobby-screen,
-#game-screen,
 #end-screen {
   justify-content: center;
   padding-top: 40px;
@@ -112,24 +111,25 @@
    ══════════════════════════════════════════ */
 .setup-container {
   width: min(100%, 580px);
+  margin: auto 0;
 }
 
 .setup-header {
   text-align: center;
-  margin: 0 auto 36px;
+  margin: 0 auto 20px;
 }
 
 .setup-header h1 {
   max-width: none;
-  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
   font-weight: 800;
   letter-spacing: -0.06em;
   line-height: 0.95;
-  margin: 12px 0 0;
+  margin: 8px 0 0;
 }
 
 .lobby-section {
-  margin-top: 36px;
+  margin-top: 18px;
 }
 
 .lobby-subtitle {
