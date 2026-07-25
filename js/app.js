@@ -1,5 +1,5 @@
 import { startLocalGame } from "./game.js";
-import { loginWithSpotify, handleSpotifyRedirect, getAccessToken, logoutSpotify, initSpotifyPlayer, activatePlayer } from "./spotify.js";
+import { loginWithSpotify, handleSpotifyRedirect, getAccessToken, logoutSpotify, initSpotifyPlayer, activatePlayer, getSpotifyUserProfile } from "./spotify.js";
 
 const screens = [...document.querySelectorAll(".screen")];
 const screenNames = new Set(screens.map((s) => s.id.replace("-screen", "")));
@@ -7,6 +7,7 @@ const authSection = document.getElementById("auth-section");
 const startSection = document.getElementById("start-section");
 
 let players = [];
+let loggedInUser = null;
 
 // ── Helpers ──
 function showScreen(name) {
@@ -26,7 +27,11 @@ function renderPlayers() {
   players.forEach((p, i) => {
     const li = document.createElement("li");
     li.className = "player-item";
-    li.innerHTML = `<span>👤 ${p}</span>`;
+    li.style.justifyContent = "space-between";
+    li.innerHTML = `
+      <span>👤 ${p}</span>
+      <button class="remove-player-btn" type="button" data-index="${i}" aria-label="Ta bort ${p}" title="Ta bort ${p}">✕</button>
+    `;
     list.append(li);
   });
 }
@@ -82,6 +87,16 @@ document.getElementById("custom-playlist-url")?.addEventListener("keydown", (e) 
 
 // ── Click handler ──
 document.addEventListener("click", (event) => {
+  const removeBtn = event.target.closest(".remove-player-btn");
+  if (removeBtn) {
+    const idx = parseInt(removeBtn.dataset.index, 10);
+    if (!isNaN(idx) && idx >= 0 && idx < players.length) {
+      players.splice(idx, 1);
+      renderPlayers();
+    }
+    return;
+  }
+
   const button = event.target.closest("[data-action]");
   if (!button) return;
   const action = button.dataset.action;
@@ -90,12 +105,14 @@ document.addEventListener("click", (event) => {
   if (action === "spotify-logout") logoutSpotify();
   
   if (action === "open-setup") {
+    if (players.length === 0 && loggedInUser) {
+      players.push(loggedInUser);
+    }
     renderPlayers();
     showScreen("lobby");
   }
   
   if (action === "go-landing") {
-    players = [];
     showScreen("landing");
   }
   
@@ -115,7 +132,7 @@ document.addEventListener("click", (event) => {
     // Activate web player in user-gesture context
     activatePlayer();
     showScreen("game");
-    startLocalGame(target, players.length > 0 ? players : ["Player 1"]);
+    startLocalGame(target, players.length > 0 ? players : [loggedInUser || "Spelare 1"]);
   }
 });
 
@@ -127,6 +144,19 @@ async function init() {
     startSection.hidden = false;
     // Start connecting the Spotify player in background
     initSpotifyPlayer().catch(err => console.warn("SDK init deferred:", err.message || err));
+
+    // Fetch Spotify user profile to auto-populate player name
+    try {
+      const name = await getSpotifyUserProfile();
+      if (name) {
+        loggedInUser = name;
+        if (players.length === 0) {
+          players.push(name);
+        }
+      }
+    } catch (e) {
+      console.warn("Could not fetch user name:", e);
+    }
   }
   showScreen("landing");
 }
