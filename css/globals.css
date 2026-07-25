@@ -1,73 +1,54 @@
 :root {
-
-    /* Colors */
-
-    --bg: #0B0B0C;
-    --surface: #17181C;
-    --surface-hover: #23252B;
-
-    --border: #2E3138;
-
-    --accent: #1ED760;
-
-    --text: #FFFFFF;
-    --text-muted: #9CA3AF;
-
-    --success: #22C55E;
-    --danger: #EF4444;
-
-
-    /* Spacing */
-
-    --radius-sm: 12px;
-    --radius-md: 20px;
-    --radius-pill: 999px;
-
-
-    /* Animation */
-
-    --transition: 0.25s ease;
-
-
-    /* Font */
-
-    --font-main: "Inter", sans-serif;
+  --bg: #060608;
+  --surface: #111318;
+  --surface-raised: #1a1d24;
+  --border: rgba(255, 255, 255, 0.08);
+  --accent: #1ed760;
+  --accent-bright: #52f58a;
+  --accent-dim: rgba(30, 215, 96, 0.15);
+  --gold: #ffd700;
+  --gold-dim: rgba(255, 215, 0, 0.2);
+  --error: #ff6b8a;
+  --text: #f0f2f4;
+  --text-muted: #7a838e;
+  --radius-sm: 14px;
+  --radius-md: 24px;
+  --radius-lg: 32px;
+  --radius-pill: 999px;
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 16px 48px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 32px 80px rgba(0, 0, 0, 0.5);
+  --font-main: "Inter", system-ui, sans-serif;
 }
 
+*, *::before, *::after { box-sizing: border-box; }
 
-/* Reset */
-
-* {
-    box-sizing: border-box;
+html {
+  background: var(--bg);
+  scroll-behavior: smooth;
 }
 
-
-html,
 body {
-
-    margin: 0;
-    padding: 0;
-
-    width: 100%;
-    min-height: 100%;
-
-    background: var(--bg);
-
-    color: var(--text);
-
-    font-family: var(--font-main);
-
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+button { font: inherit; }
 
-button {
-
-    font-family: inherit;
-
+button:focus-visible {
+  outline: 2px solid var(--accent-bright);
+  outline-offset: 3px;
 }
 
-.hidden {
+[hidden] { display: none !important; }
 
-    display: none !important;
-
+::selection {
+  background: var(--accent);
+  color: #000;
 }

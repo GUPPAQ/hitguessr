@@ -1,150 +1,163 @@
-/* ==========================================
-   TABLET
-========================================== */
+@media (max-width: 640px) {
+  .screen {
+    padding: 18px 14px;
+  }
 
-@media (max-width: 900px) {
+  #lobby-screen,
+  #end-screen {
+    padding-top: 28px;
+    padding-bottom: 60px;
+  }
 
+  .hero h1 {
+    font-size: clamp(3.4rem, 17vw, 5rem);
+  }
 
-    .screen {
+  .setup-header {
+    margin-bottom: 24px;
+  }
 
-        padding: 40px 20px;
+  .setup-header h1 {
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
 
-    }
+  .game-stage h1 {
+    font-size: clamp(1.5rem, 7vw, 2.2rem);
+  }
 
+  .game-instruction {
+    font-size: 0.82rem;
+  }
 
-    .hero h1 {
+  .mystery-card {
+    width: min(100%, 220px);
+    min-height: 250px;
+  }
 
-        font-size: 4rem;
+  .vinyl-record {
+    width: 95px;
+    height: 95px;
+  }
 
-    }
+  .vinyl-label {
+    width: 30px;
+    height: 30px;
+  }
 
+  .mystery-card__mark {
+    font-size: 0.95rem;
+  }
 
-    .hero-description {
+  .mystery-card__cover-wrapper {
+    width: 95px;
+    height: 95px;
+  }
 
-        font-size: 1.1rem;
+  .mystery-card__title {
+    font-size: 0.9rem;
+  }
 
-    }
+  .mystery-card__artist {
+    font-size: 0.75rem;
+  }
 
+  .game-feedback {
+    font-size: 0.85rem;
+  }
 
+  .timeline {
+    min-height: 160px;
+    padding: 12px 14px 20px;
+  }
+
+  .timeline-slot {
+    width: 36px;
+    height: 36px;
+    margin: 0 4px;
+  }
+
+  .timeline-slot::before {
+    font-size: 1.1rem;
+  }
+
+  .timeline-card {
+    width: 105px;
+    padding: 8px;
+    border-radius: 12px;
+    margin: 0 4px;
+  }
+
+  .timeline-card__year {
+    font-size: 0.82rem;
+    padding: 1px 6px;
+  }
+
+  .timeline-card strong {
+    font-size: 0.7rem;
+  }
+
+  .timeline-card small {
+    font-size: 0.58rem;
+  }
+
+  .scoreboard-panel {
+    padding: 12px 14px;
+  }
+
+  .add-player-row {
+    flex-direction: column;
+  }
+
+  .add-player-row .button {
+    margin-top: 0;
+  }
+
+  .end-stats {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .winner-name {
+    font-size: 2rem;
+  }
+
+  .winner-crown {
+    font-size: 3rem;
+  }
+
+  .game-header {
+    flex-wrap: wrap;
+  }
+
+  .turn-indicator {
+    align-items: flex-start;
+  }
 }
 
-
-
-/* ==========================================
-   MOBILE
-========================================== */
-
-@media (max-width: 600px) {
-
-
-    .screen {
-
-        padding:
-
-            32px 16px;
-
-    }
-
-
-
-    .hero {
-
-        gap: 18px;
-
-    }
-
-
-
-    .hero h1 {
-
-        font-size:
-
-            3.2rem;
-
-    }
-
-
-
-    .hero-description {
-
-        font-size:
-
-            1rem;
-
-        line-height:
-
-            1.6;
-
-    }
-
-
-
-    .primary-button {
-
-        width:
-
-            100%;
-
-        max-width:
-
-            320px;
-
-    }
-
-
-
-    .playlist-card {
-
-        width:
-
-            100%;
-
-        max-width:
-
-            320px;
-
-    }
-
-
-
-    .song-card {
-
-        width:
-
-            200px;
-
-    }
-
-
-
-}
-
-@media (max-width: 700px) {
-
-
-    .mode-grid {
-
-        grid-template-columns:
-
-            1fr;
-
-        width:
-
-            100%;
-
-    }
-
-
-    .mode-card {
-
-        width:
-
-            100%;
-
-        box-sizing:
-
-            border-box;
-
-    }
-
+@media (max-height: 700px) and (min-width: 641px) {
+  .screen {
+    padding-block: 14px;
+  }
+
+  .mystery-card {
+    min-height: 230px;
+    margin-top: 8px;
+  }
+
+  .vinyl-record {
+    width: 90px;
+    height: 90px;
+  }
+
+  .game-stage {
+    padding-block: 4px;
+  }
+
+  .game-stage h1 {
+    font-size: 1.8rem;
+  }
+
+  .timeline {
+    min-height: 150px;
+  }
 }

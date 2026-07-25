@@ -1,117 +1,205 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="sv">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#060608">
+  <meta name="description"
+    content="HitGuessr – lyssna på en låt, gissa årtalet och bygg din tidslinje. Ett sällskapsspel drivet av Spotify.">
+  <title>HitGuessr — musikens tidslinjespel</title>
 
-    <title>HitGuessr</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
 
-    <!-- Inter font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/globals.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="css/globals.css">
-    <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/animations.css">
-    <link rel="stylesheet" href="css/responsive.css">
+  <script src="https://sdk.scdn.co/spotify-player.js"></script>
 </head>
 
 <body>
+  <!-- Particle background -->
+  <canvas id="particles-canvas" aria-hidden="true"></canvas>
 
-    <div id="app">
+  <div id="app">
 
-        <!-- Landing Screen -->
-        <main id="landing-screen" class="screen">
+    <!-- ═══════════════════════════════════
+           LANDING
+           ═══════════════════════════════════ -->
+    <main id="landing-screen" class="screen screen--active" aria-labelledby="landing-title">
+      <div class="ambient-orb ambient-orb--one" aria-hidden="true"></div>
+      <div class="ambient-orb ambient-orb--two" aria-hidden="true"></div>
 
-            <section class="hero">
-
-                <p class="eyebrow">
-                    🎵 The music timeline game
-                </p>
-
-                <h1>
-                    Hit<span>Guessr</span>
-                </h1>
-
-                <p class="hero-description">
-                    Listen to songs. Guess the year.
-                    Build your timeline.
-                </p>
-
-                <button class="primary-button">
-                    Start Game
-                </button>
-
-            </section>
-
-
-        </main>
-
-            <!-- Setup Screen -->
-    <main id="setup-screen" class="screen hidden">
-
-        <section class="hero">
-
-            <p class="eyebrow">
-                🎵 Setup
-            </p>
-
-            <h1>
-                Choose mode
-            </h1>
-
-            <div class="mode-grid">
-
-
-                <div class="card mode-card">
-
-                    <div class="mode-icon">
-                        🎮
-                    </div>
-
-                    <h2>
-                        Single Device
-                    </h2>
-
-                    <p>
-                        Play together on one screen
-                    </p>
-
-                </div>
-
-
-
-                <div class="card mode-card disabled">
-
-                    <div class="mode-icon">
-                        🌎
-                    </div>
-
-                    <h2>
-                        Online
-                    </h2>
-
-                    <p>
-                        Coming soon
-                    </p>
-
-                </div>
-
-
-            </div>
-
-        </section>
-
+      <section class="hero">
+        <p class="eyebrow">Musikens tidslinjespel</p>
+        <h1 id="landing-title">Hit<span>Guessr</span></h1>
+        <p class="hero-description">Lyssna på en låt, gissa vilket år den kom och bygg din tidslinje. Vem har bäst
+          musiköra?</p>
+        <div id="auth-section">
+          <button class="button button--primary" type="button" data-action="spotify-login">Logga in med Spotify</button>
+          <p class="hero-note">Kräver Spotify Premium</p>
+        </div>
+        <div id="start-section" hidden>
+          <button class="button button--primary" type="button" data-action="open-setup">Starta spel →</button>
+          <button class="back-button" type="button" data-action="spotify-logout"
+            style="display: block; margin: 12px auto 0;">Logga ut</button>
+        </div>
+      </section>
     </main>
 
-    </div>
+    <!-- ═══════════════════════════════════
+           LOBBY
+           ═══════════════════════════════════ -->
+    <main id="lobby-screen" class="screen" hidden aria-labelledby="lobby-title">
+      <div class="ambient-orb ambient-orb--one" aria-hidden="true"></div>
+      <div class="ambient-orb ambient-orb--two" aria-hidden="true"></div>
 
+      <section class="setup-container">
+        <button class="back-button" type="button" data-action="go-landing">← Tillbaka</button>
+        <header class="setup-header">
+          <p class="eyebrow">Lokal multiplayer</p>
+          <h1 id="lobby-title">Nytt spel</h1>
+        </header>
 
-    <!-- JavaScript -->
-    <script type="module" src="js/app.js"></script>
+        <div class="lobby-section">
+          <h2 class="lobby-subtitle">Spelare</h2>
+          <ul id="players-list" class="players-list"></ul>
+          <div class="add-player-row">
+            <input type="text" id="new-player-name" class="text-input" placeholder="Skriv namn och tryck enter"
+              aria-label="Spelarnamn" autocomplete="off">
+            <button class="button button--secondary" type="button" data-action="add-player" style="margin-top:0;">Lägg
+              till</button>
+          </div>
+        </div>
 
+        <div class="lobby-section">
+          <h2 class="lobby-subtitle">Spellista</h2>
+          <div class="add-player-row">
+            <input type="text" id="custom-playlist-url" class="text-input"
+              placeholder="Klistra in Spotify-spellista URL" aria-label="Spotify spellista URL">
+            <button class="button button--primary" type="button" data-action="start-custom-playlist"
+              style="margin-top:0; white-space: nowrap;">Starta ▶</button>
+          </div>
+          <p style="margin: 14px 0 0; color: var(--text-muted); font-size: 0.78rem; opacity: 0.7;">Öppna Spotify →
+            Högerklicka på en spellista → Kopiera länk</p>
+        </div>
+      </section>
+    </main>
+
+    <!-- ═══════════════════════════════════
+           GAME
+           ═══════════════════════════════════ -->
+    <main id="game-screen" class="screen" hidden aria-labelledby="game-title">
+      <!-- Zone 1: HUD (Header) -->
+      <header class="game-hud">
+        <button class="back-button" type="button" data-action="go-landing">← Avsluta</button>
+        <div class="turn-indicator">
+          <span id="current-player-name" class="turn-player">Spelarens tur</span>
+          <span id="current-round" class="turn-round">Runda 1 / 20</span>
+        </div>
+      </header>
+
+      <!-- Sidebar / Off-canvas Scoreboard -->
+      <aside class="scoreboard">
+        <h3 class="scoreboard-title">Poängställning</h3>
+        <ul id="game-scoreboard" class="game-scoreboard"></ul>
+      </aside>
+
+      <!-- Zone 2: Focus Area (Mystery Card) -->
+      <section class="active-play-area">
+        <h1 id="game-title" class="game-title">Placera nästa låt</h1>
+        <p class="game-instruction">Lyssna, tryck på kortet och placera det på tidslinjen.</p>
+
+        <article id="mystery-card" class="mystery-card" draggable="true" aria-label="Hemlig låt">
+          <div class="mystery-card__inner">
+
+            <div class="mystery-card__front">
+              <div id="vinyl-record" class="vinyl-record">
+                <div class="vinyl-record__grooves"></div>
+                <div class="vinyl-label">
+                  <span id="mystery-mark" class="mystery-card__mark" aria-hidden="true">?</span>
+                </div>
+              </div>
+
+              <div class="equalizer" aria-hidden="true">
+                <span class="eq-bar"></span>
+                <span class="eq-bar"></span>
+                <span class="eq-bar"></span>
+                <span class="eq-bar"></span>
+                <span class="eq-bar"></span>
+              </div>
+
+              <div class="mystery-card__info">
+                <span class="mystery-card__title" style="color: var(--accent-bright); margin-top: 4px;">▶
+                  Spelar</span>
+              </div>
+              <span class="mystery-card__instruction">Placera på tidslinjen</span>
+            </div>
+
+            <div class="mystery-card__back">
+              <div class="mystery-card__cover-wrapper">
+                <img id="mystery-cover" class="mystery-card__cover" src="" alt="Album cover" hidden>
+              </div>
+              <div class="mystery-card__info">
+                <span class="mystery-card__title" id="mystery-title">Hemlig låt</span>
+                <span class="mystery-card__artist" id="mystery-artist"></span>
+              </div>
+            </div>
+
+          </div>
+        </article>
+
+        <p id="game-feedback" class="game-feedback" role="status" aria-live="polite"></p>
+      </section>
+
+      <!-- Zone 3: Timeline Area -->
+      <section class="timeline-container" aria-label="Tidslinje">
+        <div id="timeline" class="timeline-track" aria-label="Tidslinje"></div>
+      </section>
+    </main>
+
+    <!-- ═══════════════════════════════════
+           END SCREEN
+           ═══════════════════════════════════ -->
+    <main id="end-screen" class="screen" hidden aria-labelledby="end-title">
+      <div class="ambient-orb ambient-orb--one" aria-hidden="true"></div>
+      <div class="ambient-orb ambient-orb--two" aria-hidden="true"></div>
+
+      <section class="setup-container" style="text-align: center;">
+        <header class="setup-header">
+          <p class="eyebrow">Spelet är slut</p>
+          <p class="winner-crown" aria-hidden="true">👑</p>
+          <h1 id="end-title" style="display:none;">Vinnare</h1>
+          <h2 id="winner-name" class="winner-name">Spelare</h2>
+        </header>
+
+        <div class="end-stats">
+          <div class="stat-box">
+            <span class="stat-label">Låtar</span>
+            <span class="stat-value" id="stat-played">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Rundor</span>
+            <span class="stat-value" id="stat-rounds">0</span>
+          </div>
+        </div>
+
+        <ul id="end-leaderboard" class="end-leaderboard"></ul>
+
+        <button class="button button--gold" type="button" data-action="go-landing">Spela igen</button>
+      </section>
+    </main>
+
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+  <script src="js/particles.js" defer></script>
 </body>
+
 </html>
